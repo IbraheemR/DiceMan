@@ -1,4 +1,4 @@
-import { parse } from "./parsing/main";
+import { parse } from "./random/random_parser";
 
 import Discord from "discord.js";
 const client = new Discord.Client();
@@ -14,6 +14,8 @@ client.on('message', msg => {
     }
 
     parse(msg.content);
+
+    console.log(msg.content)
 });
 
 client.login(process.env.TOKEN)

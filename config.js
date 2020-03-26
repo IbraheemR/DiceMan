@@ -14,21 +14,22 @@ export const messages = {
 }
 
 export const dice = {
-  maxTimes: 10,
+  MAX_QUANTITY: 10,
   errors: {
-    MAX_TIMES_EXCEEDED: (action, max) => `Cannot roll a dice more than ${max} times` + (action ? ` (\`${action}\`)` : "")
+    MAX_QUANTITY_EXCEEDED: (action, max) => `Cannot roll a dice more than ${max} times` + (action ? ` (\`${action}\`)` : "")
   }
 }
 
 export const coin = {
   outcomes: {
     HEAD: Symbol("head"),
+    HEAD: Symbol("head"),
     TAIL: Symbol("tail")
   },
 
-  maxTimes: 100,
+  MAX_QUNATITY: 100,
   errors: {
-    MAX_TIMES_EXCEEDED: (action, max) => `Cannot flip a coin more than ${max} times` + (action ? ` (\`${action}\`)` : "")
+    MAX_QUANTITY_EXCEEDED: (action, max) => `Cannot flip a coin more than ${max} times` + (action ? ` (\`${action}\`)` : "")
   }
 }
 
@@ -39,9 +40,9 @@ export const dreidel = {
     HEY: Symbol("hey"),
     SHIN: Symbol("shin")
   },
-  maxTimes: 10,
+  MAX_QUANTITY: 10,
   errors: {
-    MAX_TIMES_EXCEEDED: (action, max) => `The Dreidel broke! Cannot spin more than ${max} times` + (action ? ` (\`${action}\`)` : "")
+    MAX_QUANTITY_EXCEEDED: (action, max) => `The Dreidel broke! Cannot spin more than ${max} times` + (action ? ` (\`${action}\`)` : "")
   }
 }
 
@@ -69,8 +70,8 @@ export const card = {
     QUEEN: Symbol("queen"),
     KING: Symbol("king")
   },
-  maxTimes: 52,
+  MAX_QUANTITY: 52,
   errors: {
-    MAX_TIMES_EXCEEDED: (action) => `Cannot draw more than 52 cards from the same card deck` + (action ? ` (\`${action}\`)` : "")
+    MAX_QUANTITY_EXCEEDED: (action) => `Cannot draw more than 52 cards from the same card deck` + (action ? ` (\`${action}\`)` : "")
   }
 }

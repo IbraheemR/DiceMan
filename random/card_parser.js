@@ -2,18 +2,20 @@ import { card } from "../generators";
 
 import { card as cardConfig, messages } from "../config";
 
-export const pattern = /^card(?:x?([0-9]+))?/i
-export const run = ([action, times = 1], error) => {
+export const pattern = /^(?<quantity>[0-9]+)?card/i
+export const run = (regex, error) => {
     let results = []
 
-    if (times > cardConfig.maxTimes) {
-        error(messages.types.ERROR, cardConfig.errors.MAX_TIMES_EXCEEDED(action, cardConfig.maxTimes))
+    let { quantity = 1 } = regex.groups
+
+    if (quantity > cardConfig.MAX_QUANTITY) {
+        error(messages.types.ERROR, cardConfig.errors.MAX_QUANTITY_EXCEEDED(regex.input, cardConfig.MAX_QUANTITY))
         return
     } else {
 
         // TODO: optimise by drawing from same deck instead of randomly trying again and again
 
-        for (let i = 0; i < times; i++) {
+        for (let i = 0; i < quantity; i++) {
             let new_card;
             while (true) {
                 new_card = card()

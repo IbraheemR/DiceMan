@@ -9,12 +9,12 @@ export const messages = {
   colors: {
     ERROR: "#dd162d",
     WARN: "#ed8c15",
-    INFO: "#2a5b21",
+    INFO: "#4c6d43",
   },
   errors: {
     COMMAND_LIMIT: (max) => `Too many commands entered. Max ${max} allowed`,
     COMMAND_RANGE: (action, max) => `Cannot ${action} more than ${max} times`,
-    MALFORMED: (action) => "I don't know what you mean" + (action ? ` by \`${action}\`.` : "."),
+    MALFORMED: (action) => "I don't know what you mean" + (action ? ` by \`${action}\`.` : ".") + " Try \`@DiceMan help\`",
     BAD_HELP: (thing) => `I don't know how to help you with \`${thing}\`. Try \`@DiceMan help\``
   }
 }

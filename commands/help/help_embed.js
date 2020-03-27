@@ -46,7 +46,7 @@ export default client => {
         .addField("`deck`", "**Deck management**\n Creates persistent decks to allow you to play games.\nUse `help deck` for more.", true)
 
     let randomTitle = "Random Generators";
-    let randomDescription = "**Include as many random commands in one message as you like. Seperate with spaces, e.g `2dice 1card`\n**";
+    let randomDescription = "**Include as many random commands in one message as you like. Seperate with spaces, e.g `@DiceMan 2dice 1card`\n**";
 
     for (let { help } of Object.values(randomCommands)) {
         //Pull random commands from config
@@ -65,8 +65,9 @@ export default client => {
 
     // Deck help
     let deck = new MessageEmbed()
+        .setColor(messages.colors.INFO)
         .setTitle("Deck help")
-
+        .setDescription("Comming soon!")
 
     console.log("Built help embeds!")
     return { main, deck }

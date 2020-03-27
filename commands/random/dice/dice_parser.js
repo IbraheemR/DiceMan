@@ -2,7 +2,7 @@ import { dice } from "../generators";
 
 import { random as randomConfig, messages } from "../../../config";
 
-export const pattern = /^(?<quantity>[0-9]+)?(d|dice|die)(?<type>[0-9]+)?/i;
+export const pattern = /^(?<quantity>[0-9]+)?(d|dice|die)(?<type>[0-9]+)?$/i;
 export const run = (regex, error) => {
     let { quantity = 1, type = 6 } = regex.groups
 

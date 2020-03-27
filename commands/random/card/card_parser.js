@@ -2,7 +2,7 @@ import { card } from "../generators";
 
 import { random as randomConfig, messages } from "../../../config";
 
-export const pattern = /^(?<quantity>[0-9]+)?card/i
+export const pattern = /^(?<quantity>[0-9]+)?cards?$/i
 export const run = (regex, error) => {
     let results = []
 

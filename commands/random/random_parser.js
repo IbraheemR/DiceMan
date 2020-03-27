@@ -2,28 +2,26 @@
 
 import { messages } from "../../config"
 
-import * as dice from "./parsers/dice_parser";
-import * as coin from "./parsers/coin_parser";
-import * as card from "./parsers/card_parser";
-import * as dreidel from "./parsers/dreidel_parser";
+import * as dice from "./dice/dice_parser";
+import * as coin from "./coin/coin_parser";
+import * as card from "./card/card_parser";
+import * as dreidel from "./dreidel/dreidel_parser";
 
-
-
-export const commandTypes = [
+const commandTypes = [
   dice, coin, card, dreidel
 ]
 
-export function parse(text, errorHandler) {
+export const pattern = /.*/;
 
-  if (typeof text !== 'string') { errorHandler(messages.types.ERROR, messages.errors.MALFORMED()) };
-
+export function run(msg, text, errorHandler) {
   let commands = text.match(/([^, ]+|,)/gi); // split by comma
 
   if (commands.length > messages.MAX_COMMANDS) {
     errorHandler(messages.types.ERROR, messages.errors.COMMAND_LIMIT())
+    return true;
   }
 
-  let results = commands.map(action => {
+  commands.forEach(action => {
 
     if (action == ",") {
       return NEW_GROUP;
@@ -35,13 +33,13 @@ export function parse(text, errorHandler) {
 
         console.log(`${action} -> ${type.pattern}`);
 
-        return type.run(match, errorHandler);
+        msg.reply(JSON.stringify(type.run(match, errorHandler)));
+        return true;
       }
     }
 
     errorHandler(messages.types.ERROR, messages.errors.MALFORMED(action));
-  })
-
-  return results;
+    return true;
+  });
 }
 

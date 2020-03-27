@@ -1,6 +1,6 @@
 import { card } from "../generators";
 
-import { card as cardConfig, messages } from "../config";
+import { random as randomConfig, messages } from "../../../config";
 
 export const pattern = /^(?<quantity>[0-9]+)?card/i
 export const run = (regex, error) => {
@@ -8,8 +8,8 @@ export const run = (regex, error) => {
 
     let { quantity = 1 } = regex.groups
 
-    if (quantity > cardConfig.MAX_QUANTITY) {
-        error(messages.types.ERROR, cardConfig.errors.MAX_QUANTITY_EXCEEDED(regex.input, cardConfig.MAX_QUANTITY))
+    if (quantity > randomConfig.card.MAX_QUANTITY) {
+        error(messages.types.ERROR, randomConfig.card.errors.MAX_QUANTITY_EXCEEDED(regex.input, randomConfig.card.MAX_QUANTITY))
         return
     } else {
 

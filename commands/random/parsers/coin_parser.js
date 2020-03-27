@@ -1,6 +1,6 @@
 import { coin } from "../generators";
 
-import { coin as coinConfig, messages } from "../config";
+import { random as randomConfig, messages } from "../../../config";
 
 export const pattern = /^(?<quantity>[0-9]+)?coins?/i
 export const run = (regex, error) => {
@@ -8,8 +8,8 @@ export const run = (regex, error) => {
 
     let { quantity = 1 } = regex.groups;
 
-    if (quantity > coinConfig.MAX_QUNATITY) {
-        error(messages.types.ERROR, coinConfig.errors.MAX_QUANTITY_EXCEEDED(regex.input, coinConfig.MAX_QUNATITY))
+    if (quantity > random.coin.MAX_QUNATITY) {
+        error(messages.types.ERROR, random.coin.errors.MAX_QUANTITY_EXCEEDED(regex.input, random.coin.MAX_QUNATITY))
         return
     } else {
 

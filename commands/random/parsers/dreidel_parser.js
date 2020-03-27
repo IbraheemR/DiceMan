@@ -1,16 +1,16 @@
 import { dreidel } from "../generators";
 
-import { dreidel as dreidelConfig, messages } from "../config";
+import { random as randomConfig, messages } from "../../../config";
 
-export const pattern = /^(?<quantity>[0-9]+)?(?:dreidel|ddl)/i
+export const pattern = /^(?<quantity>[0-9]+)?(?:dreidel|ddl)s?/i
 export const run = (regex, error) => {
     let results = []
 
     let { quantity = 1 } = regex.groups;
 
-    if (quantity > dreidelConfig.MAX_QUANTITY) {
+    if (quantity > randomConfig.MAX_QUANTITY) {
         console.log(times)
-        error(messages.types.ERROR, dreidelConfig.errors.MAX_QUANTITY_EXCEEDED(regex.input, dreidelConfig.MAX_QUANTITY))
+        error(messages.types.ERROR, randomConfig.errors.MAX_QUANTITY_EXCEEDED(regex.input, randomConfig.MAX_QUANTITY))
         return
     } else {
 

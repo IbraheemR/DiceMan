@@ -20,7 +20,7 @@ export default class {
 
     send(thing, msg, errorHandler) {
         if (!this.embeds[thing]) {
-            errorHandler(messages.types.ERROR, messages.errors.BAD_HELP(thing))
+            errorHandler(messages.errors.BAD_HELP(thing))
 
         } else {
             if (msg.channel.type !== "dm") {

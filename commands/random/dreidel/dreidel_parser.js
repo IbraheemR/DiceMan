@@ -1,16 +1,19 @@
 import { dreidel } from "../generators";
+import dreidelEmbed from "./dreidel_embed";
+
 
 import { random as randomConfig, messages } from "../../../config";
 
 export const pattern = /^(?<quantity>[0-9]+)?(?:dreidel|ddl)s?$/i
-export const run = (regex, error) => {
+export const generateReply = (msg, regex, error) => {
     let results = []
 
     let { quantity = 1 } = regex.groups;
 
-    if (quantity > randomConfig.MAX_QUANTITY) {
-        console.log(times)
-        error(messages.types.ERROR, randomConfig.errors.MAX_QUANTITY_EXCEEDED(regex.input, randomConfig.MAX_QUANTITY))
+    // Generate
+
+    if (quantity > randomConfig.dreidel.MAX_QUANTITY) {
+        error(randomConfig.dreidel.errors.MAX_QUANTITY_EXCEEDED(regex.input, randomConfig.dreidel.MAX_QUANTITY))
     } else {
 
         for (let i = 0; i < quantity; i++) {
@@ -18,5 +21,8 @@ export const run = (regex, error) => {
         }
     }
 
-    return results;
+    // Return message dispatcher
+
+    return () => msg.reply({ embed: dreidelEmbed(regex, results) })
+
 }

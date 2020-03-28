@@ -1,41 +1,37 @@
-import { card } from "../generators";
 
 import { random as randomConfig, messages } from "../../../config";
 
 export const pattern = /^(?<quantity>[0-9]+)?cards?$/i
-export const run = (regex, error) => {
+export const generateReply = (msg, regex, error) => {
     let results = []
 
     let { quantity = 1 } = regex.groups
 
+    // Generate
+
     if (quantity > randomConfig.card.MAX_QUANTITY) {
-        error(messages.types.ERROR, randomConfig.card.errors.MAX_QUANTITY_EXCEEDED(regex.input, randomConfig.card.MAX_QUANTITY))
+        error(randomConfig.card.errors.MAX_QUANTITY_EXCEEDED(regex.input, randomConfig.card.MAX_QUANTITY))
         return
-    } else {
+    }
 
-        // TODO: optimise by drawing from same deck instead of randomly trying again and again
+    let deck = []
 
-        for (let i = 0; i < quantity; i++) {
-            let new_card;
-            while (true) {
-                new_card = card()
-
-                // Check for duplicates
-                let contains = false;
-                for (let old_card of results) {
-                    if (old_card[0] == new_card[0] && old_card[1] == new_card[1]) {
-                        contains = true
-                        break
-                    }
-                }
-
-                if (!contains) {
-                    results.push(new_card)
-                    break
-                };
-            }
+    for (let suit of Object.keys(randomConfig.card.suits)) {
+        for (let symbol of Object.keys(randomConfig.card.symbols)) {
+            deck.push([suit, symbol])
         }
     }
 
-    return results;
+    for (let i = 0; i < quantity; i++) {
+        results.push(
+            ...deck.splice(Math.floor(Math.random() * deck.length), 1)
+        )
+    }
+
+    console.log(results)
+
+
+    // Return message dispatcher
+
+    return () => { }
 }

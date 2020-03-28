@@ -18,14 +18,6 @@ export function coin() {
   return randChoice(Object.values(config.random.coin.outcomes));
 }
 
-export function card() {
-  let suit = randChoice(Object.values(config.random.card.suits))
-  let number = randChoice(Object.values(config.random.card.symbols))
-
-  return [suit, number]
-}
-
-
 export function dreidel() {
   return randChoice(Object.values(config.random.dreidel.outcomes))
 }
